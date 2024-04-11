@@ -1,0 +1,133 @@
+/* * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    scroll-behavior: smooth;
+    display: block;
+    font-family: "Poppins", sans-serif;
+    overflow-y: auto;
+    overflow-x: hidden;
+    color: black;
+
+}
+nav{
+    width: 100%;
+    height: 10%;
+    background-color: aquamarine;
+}
+.container{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    background-color: aliceblue;
+}
+.left{
+    background-color: antiquewhite;
+    width: 30%;
+    border-radius: 0 200px 0px 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+ .right{
+   /* background-color: aqua ; */
+    /* width: 70%;
+    justify-content: center;
+    align-items:center ;
+    display: flex;
+}
+.register_user{
+    justify-self: center;
+    display: block;
+}
+.input-group{
+    margin: 0% 5% 5% 0;
+    display: flex;
+}
+.input-group input{
+    margin: 10% 10% 0 0;
+}
+.input-group-gender-group label{
+    margin: 10% 10% 0 0;
+    
+} */ 
+/* register_style.css */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.left {
+    flex: 1;
+    /* background-color: #45a049; */
+
+}
+
+.right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+h2 {
+    font-size: 24px;
+}
+
+.input-group {
+    margin-bottom: 20px;
+    width: 70%;
+    height: 90%;
+}
+
+.input-group input,
+.input-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.input-group-gender-group {
+    margin-bottom: 20px;
+}
+
+.input-group-gender-group label {
+    margin-right: 10px;
+}
+
+.signUpbtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.signUpbtn:hover {
+    background-color: #45a049;
+}
+
+p {
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+a {
+    text-decoration: none;
+    color: #007bff;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
