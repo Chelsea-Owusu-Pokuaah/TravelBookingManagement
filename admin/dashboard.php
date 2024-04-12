@@ -1,6 +1,7 @@
 <?php
 include "../settings/core.php";
 include_once ("../function/displayUserDetails.php");
+include "../action/getStatAdmin.php";
 
 $roleID = userRoleIdExist();
 if ($roleID != 2) {
@@ -30,7 +31,7 @@ if ($roleID != 2) {
         <ul>
             <li>
                 <i class="fas fa-home"></i>
-                <a href="../view/UserDashboard.php">
+                <a href="../admin/dashboard.php">
                     <span class="nav-item">Home</span>
                 </a>
             </li>
@@ -41,6 +42,12 @@ if ($roleID != 2) {
                     <span class="nav-item">Flights</span>
                 </a>
             </li>
+            <li class="active">
+                <i class="fas fa-user"></i>
+                <a href="../admin/users.php">
+                    <span class="nav-item">All Users</span>
+                </a>
+            </li>
             <li> <i class="fas fa-book"></i>
 
                 <a href="../admin/booking_requests.php">
@@ -49,7 +56,7 @@ if ($roleID != 2) {
             </li>
             <li> <i class="fas fa-question-circle"></i>
 
-                <a href="../view/help.php">
+                <a href="../admin/help.php">
                     <span class="nav-item">Help</span>
                 </a>
             </li>
@@ -65,6 +72,8 @@ if ($roleID != 2) {
     <div class="main-content">
         <div class="top">
             <h1>Dashboard</h1>
+            <i class="fas fa-user"></i>
+
             <!-- <i class="fas fa-user"></i>
             <div class="sidebar-right">
                 <h2 class="user-details">User Information:</h2>
@@ -80,83 +89,115 @@ if ($roleID != 2) {
             </div> -->
         </div>
         <div class="welcome-bar">
-            <h3>Welcome Chelsea!</h3>
+            <h2>Welcome!</h2>
         </div>
         <div class="main-container">
             <div class="container">
                 <div class="cards">
                     <div class="card">
-                        <div class="card-header">Bookings Made</div>
-                        <div class="card-content">100</div>
+                        <div class="card-header">Bookings Requested</div>
+                        <div class="card-content">
+                            <?php
+                            echo getRequestedBookingCount();
+                            ?>
+                        </div>
                     </div>
 
                     <div class="card">
                         <div class="card-header">Bookings Cancelled</div>
-                        <div class="card-content">20</div>
+                        <div class="card-content">
+                            <?php echo getCancelledBookingCount();
+                            ?>
+                        </div>
                     </div>
 
                     <div class="card">
-                        <div class="card-header">Bookings Confirmed</div>
-                        <div class="card-content">80</div>
+                        <div class="card-header">Bookings Processed</div>
+                        <div class="card-content">
+                            <?php echo getBookedBookingCount();
+                            ?>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="recent-bookings">
-                <div class="card-header">Recent Bookings</div>
-                <div class="recent-booking">
-                    <div class="booking-item"><span>Booking 1:</span> John Doe - Room 101</div>
+                        <div class="recent-bookings">
+                            <div class="card-header">Recent Bookings</div>
+                            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>
+                            Destination
+                        </th>
+                        <th>
+                            Date
+                        </th>
+                        <th>
+                            Duration
+                        </th>
+                       <th>
+                            Number of People
+                        </th>
+                        <th>
+                            Budget
+                        </th>
+                        <th>
+                            Passenger Type
+                        </th>
+                        <th>
+                            Status
+                        </th>
+                        <th>
+                            Action
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    include_once "../function/displayBookingRequest.php";
+                    ?>
+                </tbody>
+            </table>
+                        </div>
+                    </div>
+
                 </div>
-                <div class="recent-booking">
-                    <div class="booking-item"><span>Booking 2:</span> Jane Smith - Room 102</div>
+                <div class="sidebar-right">
+                    <!-- <i class="fas fa-user"></i> -->
+                    <div class="user-link">
+                        <div class="user-info">
+                            <?php
+                            userDetails();
+                            ?>
+                        </div>
+                    </div>
                 </div>
-                <div class="recent-booking">
-                    <div class="booking-item"><span>Booking 3:</span> Alice Johnson - Room 103</div>
-                </div>
-                <div class="recent-booking">
-                    <div class="booking-item"><span>Booking 4:</span> Bob Brown - Room 104</div>
-                </div>
-            </div>
-        </div>
+                <script>
+                    // Get the modal
+                    var modal = document.getElementById("myModal");
 
-    </div>
-    <div class="sidebar-right">
-        <i class="fas fa-user"></i>
-        <div class="user-link">
-            <div class="user-info">
-                <?php
-                userDetails();
-                ?>
-            </div>
-        </div>
-    </div>
-    <script>
-        // Get the modal
-        var modal = document.getElementById("myModal");
+                    // Get the button that opens the modal
+                    var btn = document.getElementsByClassName("book")[0];
 
-        // Get the button that opens the modal
-        var btn = document.getElementsByClassName("book")[0];
+                    // Get the <span> element that closes the modal
+                    var span = document.getElementsByClassName("close")[0];
 
-        // Get the <span> element that closes the modal
-        var span = document.getElementsByClassName("close")[0];
+                    // When the user clicks the button, open the modal 
+                    function openModal() {
+                        modal.style.display = "block";
+                    }
 
-        // When the user clicks the button, open the modal 
-        function openModal() {
-            modal.style.display = "block";
-        }
+                    // When the user clicks on <span> (x), close the modal
+                    function closeModal() {
+                        modal.style.display = "none";
+                    }
 
-        // When the user clicks on <span> (x), close the modal
-        function closeModal() {
-            modal.style.display = "none";
-        }
-
-        // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function (event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
-    </script>
+                    // When the user clicks anywhere outside of the modal, close it
+                    window.onclick = function (event) {
+                        if (event.target == modal) {
+                            modal.style.display = "none";
+                        }
+                    }
+                </script>
 </body>
 
 </html>

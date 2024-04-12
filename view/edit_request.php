@@ -39,7 +39,7 @@ if (isset($_GET["requestID"])) {
     <div class="sidebar">
         <a href="#" class="logo">
             <img src="../images/Bus.png" alt="">
-            <span class="nav-item">BusBoss</span>
+            <span class="nav-item">TraveX</span>
         </a>
         <ul>
             <li>
@@ -48,7 +48,7 @@ if (isset($_GET["requestID"])) {
                     <span class="nav-item">Home</span>
                 </a>
             </li>
-            <li> <i class="fas fa-user"></i>
+            <!-- <li> <i class="fas fa-user"></i>
 
                 <a href="../view/Profile.php">
                     <span class="nav-item">Profile</span>
@@ -59,7 +59,7 @@ if (isset($_GET["requestID"])) {
                 <a href="../view/History.php">
                     <span class="nav-item">History</span>
                 </a>
-            </li>
+            </li> -->
             <li> <i class="fas fa-book"></i>
 
                 <a href="../view/booking_view.php">

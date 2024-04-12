@@ -4,7 +4,7 @@ include "../action/getBookings.php";
 
 
 $results=  getAllBookings();
-
+// var_dump($results);
 foreach($results as $result){
 echo '
 <tr>

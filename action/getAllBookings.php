@@ -10,7 +10,7 @@ function getAllBookingsRequests() {
     // Initialize an empty array to store the bookings
 
     // Query to fetch all bookings
-    $sql = "SELECT BookingRequest.requestID, destination, date,budget, numberOfPeople, typeName, duration, status_name FROM BookingRequest JOIN Status on BookingRequest.statusID= Status.status_id JOIN PassengerType on BookingRequest.passengerType  = PassengerType.ptid  JOIN RequestsEmployees ON BookingRequest.requestID = RequestsEmployees.requestID Where employeeID = $userID";
+    $sql = "SELECT BookingRequest.requestID, destination, date, budget, numberOfPeople, typeName, duration, status_name FROM BookingRequest JOIN Status ON BookingRequest.statusID = Status.status_id JOIN PassengerType ON BookingRequest.passengerType = PassengerType.ptid JOIN RequestsEmployees ON BookingRequest.requestID = RequestsEmployees.requestID WHERE RequestsEmployees.employeeID = $userID";
 
     // Execute the query
     $result = $conn->query($sql);
@@ -25,5 +25,6 @@ function getAllBookingsRequests() {
     // Return the array of bookings
     return $bookings;
 }
+// getAllBookingsRequests();
 
 

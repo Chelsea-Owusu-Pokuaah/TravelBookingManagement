@@ -6,6 +6,12 @@ if (isset($_POST["editFlightBtn"]) && isset($_GET["flightID"])) {
     // Get the flight ID to update
     $flightID = mysqli_real_escape_string($conn, $_GET["flightID"]);
 
+    // Check if any of the required fields are empty
+    if (empty($_POST["arrivalCity"]) && empty($_POST["date"]) && empty($_POST["arrivalDate"]) && empty($_POST["airline"])) {
+        handleFlightError("At least one field is required.");
+        exit(); // Stop further execution
+    }
+
     // Check if departure date is not after arrival date
     $departureDate = mysqli_real_escape_string($conn, $_POST["date"]);
     $arrivalDate = mysqli_real_escape_string($conn, $_POST["arrivalDate"]);
@@ -36,14 +42,13 @@ if (isset($_POST["editFlightBtn"]) && isset($_GET["flightID"])) {
     }
 
     // Check for duplicates
-    $departureCity = mysqli_real_escape_string($conn, $_POST["departureCity"]);
     $arrivalCity = mysqli_real_escape_string($conn, $_POST["arrivalCity"]);
     $date = mysqli_real_escape_string($conn, $_POST["date"]);
     $arrivalDate = mysqli_real_escape_string($conn, $_POST["arrivalDate"]);
     $airline = mysqli_real_escape_string($conn, $_POST["airline"]);
 
     // Perform duplicate check query
-    $duplicateQuery = "SELECT * FROM Flight WHERE departureCity = '$departureCity' AND arrivalCity = '$arrivalCity' AND departureDate = '$date' AND arrivalDate = '$arrivalDate' AND flightID != '$flightID'";
+    $duplicateQuery = "SELECT * FROM Flight WHERE arrivalCity = '$arrivalCity' AND departureDate = '$date' AND arrivalDate = '$arrivalDate' AND flightID != '$flightID'";
     $result = mysqli_query($conn, $duplicateQuery);
 
     // Check if any duplicate found
@@ -52,15 +57,12 @@ if (isset($_POST["editFlightBtn"]) && isset($_GET["flightID"])) {
         exit(); // Stop further execution
     }
 
-    // If no duplicates found, proceed with updating the flight details
+    // If no duplicates found or required fields are empty, proceed with updating the flight details
 
     // Initialize an empty array to store the update statements
     $updateStatements = array();
 
     // Check if each field is empty and construct the corresponding update statement
-    if (!empty($departureCity)) {
-        $updateStatements[] = "departureCity = '$departureCity'";
-    }
     if (!empty($arrivalCity)) {
         $updateStatements[] = "arrivalCity = '$arrivalCity'";
     }
@@ -73,10 +75,10 @@ if (isset($_POST["editFlightBtn"]) && isset($_GET["flightID"])) {
     if (!empty($airline)) {
         $updateStatements[] = "airlineID = '$airline'";
     }
+
     // Construct the final update query by joining the update statements
     $updateQuery = "UPDATE Flight SET " . implode(", ", $updateStatements) . " WHERE flightID = '$flightID'";
-    // echo $updateQuery;
-    // exit;
+
     // Perform the update query
     if (mysqli_query($conn, $updateQuery)) {
         handleFlightSuccess("Flight updated successfully.");
@@ -106,3 +108,4 @@ function handleFlightSuccess($successMessage)
     header("Location: ../admin/flight.php");
     exit();
 }
+?>

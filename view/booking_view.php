@@ -30,7 +30,7 @@ if ($roleID != 1) {
     <div class="sidebar">
         <a href="#" class="logo">
             <img src="../images/Bus.png" alt="">
-            <span class="nav-item">BusBoss</span>
+            <span class="nav-item">TraveX</span>
         </a>
         <ul>
             <li>
@@ -39,12 +39,12 @@ if ($roleID != 1) {
                     <span class="nav-item">Home</span>
                 </a>
             </li>
-            <li> <i class="fas fa-user"></i>
+            <!-- <li> <i class="fas fa-user"></i>
 
                 <a href="../view/profile.php">
                     <span class="nav-item">Profile</span>
                 </a>
-            </li>
+            </li> -->
 
             <li> <i class="fas fa-book"></i>
 
@@ -70,6 +70,7 @@ if ($roleID != 1) {
     <div class="main-content">
         <div class="top">
             <h1>Bookings</h1>
+            <i class="fas fa-user"></i>
             <button type="button" class="btn btn-primary btn-lg" onclick="openModal()">Book Now</button>
             <!-- <i class="fas fa-user"></i>
             <div class="sidebar-right">
@@ -222,7 +223,7 @@ if ($roleID != 1) {
         </div>
     </div>
     <div class="sidebar-right">
-        <i class="fas fa-user"></i>
+        <!-- <i class="fas fa-user"></i> -->
         <div class="user-link">
             <div class="user-info">
                 <?php
@@ -246,6 +247,28 @@ if ($roleID != 1) {
             // Output JavaScript code to show the alert
             echo "showAlert('$message', '$type');";
         }
+        if (isset($_SESSION["booking_deleted"])) {
+            // Check if it's a success or error
+            $type = ($_SESSION["booking_deleted"] === true) ? 'success' : 'error';
+            // Get the message from $_SESSION["booking_deleted_created"]
+            $message = $_SESSION["booking_msg"];
+            // Unset the session variables
+            unset($_SESSION["booking_deleted"]);
+            unset($_SESSION["booking_msg"]);
+            // Output JavaScript code to show the alert
+            echo "showAlert('$message', '$type');";
+        }
+        if (isset($_SESSION["update"])) {
+            // Check if it's a success or error
+            $type = ($_SESSION["update"] === true) ? 'success' : 'error';
+            // Get the message from $_SESSION["update_created"]
+            $message = $_SESSION["booking_updated"];
+            // Unset the session variables
+            unset($_SESSION["booked"]);
+            unset($_SESSION["booking_updated"]);
+            // Output JavaScript code to show the alert
+            echo "showAlert('$message', '$type');";
+        }
         ?>
         function showAlert(message, type) {
             Swal.fire({
@@ -255,7 +278,6 @@ if ($roleID != 1) {
                 timer: 2000
             });
 
-        }
     </script>
     <script>
         // Get the modal

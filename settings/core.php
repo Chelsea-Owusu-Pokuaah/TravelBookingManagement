@@ -3,7 +3,6 @@ if (session_status() == PHP_SESSION_NONE) {
     // Session has not been started, so start it
     session_start();
 }
-
 if (!function_exists('userIdExist')) {
     function userIdExist() {
         if(!isset($_SESSION['user_id'])){

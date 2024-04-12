@@ -1,5 +1,15 @@
+
+*{
+  margin: 0;
+  padding: 0;
+  outline: none;
+  border: none;
+  text-decoration: none;
+  box-sizing: border-box;
+  font-family: "Noto Sans", sans-serif;
+}
 body {
-    font-family: Arial, sans-serif;
+    /* font-family: Arial, sans-serif; */
     background-color: #f0f0f0;
     margin: 0;
     padding: 0;
@@ -13,6 +23,9 @@ body {
     background-color: #333;
     transition: width 0.5s;
     overflow-y: auto;
+    /* display: flex; */
+    /* flex: wrap; */
+    /* justify-content: space-between; */
 }
 
 .sidebar a {
@@ -126,9 +139,9 @@ body {
 /* .top button:hover selector{
     color: #2e7d32              
 } */
-/* .top i{
-    font-size: 50px;
-}
+.top i{
+    font-size: 30px;
+}/* 
 .top i:hover{
     color: #d2eb93;
 }
@@ -227,12 +240,25 @@ body {
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
     justify-self: space-around;
     margin: 2%;
+    /* height: 10px; */
 
 }
-
+.booking-item {
+    height:50px ;
+    display: flex;
+    align-content: center;
+    padding: 7px;
+    flex-direction: row;
+    justify-content: space-between;
+}
 .booking-item span {
     font-weight: bold;
     color: #2e7d32;
+    display: flex;
+
+}
+.booking-item .flight-detail span{
+    color: #333;
 }
 
 /* Modal styling */
@@ -272,11 +298,14 @@ body {
 }
 .sidebar-right {
     position: fixed;
-    /* display: none; */
+    display: flex;
+    flex: wrap;
+    justify-content: center;
+    align-self: center;
     top: 0;
     right: 0;
     width: 4%;
-    height: 50%;
+    height: 30%;
     padding: 20px;
     z-index: 1000;
     /* width: 20%; */
@@ -324,3 +353,49 @@ body {
 .sidebar-right:hover .user-info{
     display: block;
 }
+.flight-detail {
+    display: inline-block;
+    margin-right: 20px; /* Adjust as needed */
+}
+.user-details {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 20px;
+    margin-top: 20px;
+  }
+  
+  .user-details h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .user-details p {
+    margin: 0;
+    margin-bottom: 10px;
+    font-size: 16px;
+  }
+  
+  .user-details strong {
+    font-weight: bold;
+  }
+  
+  .user-details p:last-child {
+    margin-bottom: 0;
+  }
+  .info-box {
+    margin-bottom: 10px;
+    background-color: #f0f0f0;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.info-box p {
+    margin: 0;
+}
+
+.info-box p strong {
+    font-weight: bold;
+    margin-right: 5px;
+}  

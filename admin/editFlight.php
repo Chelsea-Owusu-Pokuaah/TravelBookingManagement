@@ -56,6 +56,12 @@ if (isset($_GET["flightID"])) {
                     <span class="nav-item">Flights</span>
                 </a>
             </li>
+            <li class="active">
+                <i class="fas fa-user"></i>
+                <a href="../admin/users.php">
+                    <span class="nav-item">All Users</span>
+                </a>
+            </li>
             <li> <i class="fas fa-book"></i>
 
                 <a href="../admin/booking_requests.php">
@@ -80,13 +86,14 @@ if (isset($_GET["flightID"])) {
     <div class="main-content">
         <div class="top">
             <h1>Edit Flight Details</h1>
+            
         </div>
         <div class="edit-form">
             <form id="editForm" action='<?php echo "../action/updateFlight.php?flightID=" . $rid ?>'method="POST">
-                <div class="col-md-6">
+                <!-- <div class="col-md-6">
                     <label for="departureCity" class="form-label">Departure City</label>
                     <input type="text" class="form-control" id="departureCity" name="departureCity">
-                </div>
+                </div> -->
                 <div class="col-md-6">
                     <label for="departureDate" class="form-label">Arrival City</label>
                     <input type="text" class="form-control" id="arrivalCity" name="arrivalCity">
@@ -119,14 +126,14 @@ if (isset($_GET["flightID"])) {
                         } ?>
                     </select>
                 </div>
-                <div class="col-12">
+                <!-- <div class="col-12">
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" id="gridCheck">
                         <label class="form-check-label" for="gridCheck">
                             Check me out
                         </label>
                     </div>
-                </div>
+                </div> -->
                 <div class="col-12">
                     <button style="background-color: #2e7d32; border-color: cornsilk" type="submit"
                         class="btn btn-primary" name="editFlightBtn">Update</button>

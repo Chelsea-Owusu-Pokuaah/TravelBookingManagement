@@ -59,7 +59,7 @@ if (isset($_POST['loginbtn'])) {
         // exit();
         $_SESSION['login'] = false;
         $_SESSION['login_msg'] = "Account doesn't exits";
-        // header('Location: ../Login/login_view.php');
+        header('Location: ../Login/login_view.php');
         $conn->close();
         exit();
     }

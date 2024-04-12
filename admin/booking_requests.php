@@ -31,7 +31,7 @@ if ($roleID != 2) {
     <div class="sidebar">
         <a href="#" class="logo">
             <img src="../images/Bus.png" alt="">
-            <span class="nav-item">BusBoss</span>
+            <span class="nav-item">TraveX</span>
         </a>
         <ul>
             <li>
@@ -47,7 +47,12 @@ if ($roleID != 2) {
                     <span class="nav-item">Flights</span>
                 </a>
             </li>
-
+            <li class="active">
+                <i class="fas fa-user"></i>
+                <a href="../admin/users.php">
+                    <span class="nav-item">All Users</span>
+                </a>
+            </li>
             <li> <i class="fas fa-book"></i>
 
                 <a href="../admin/booking_request.php">
@@ -71,7 +76,9 @@ if ($roleID != 2) {
 
     <div class="main-content">
         <div class="top">
-            <h1>Booking Requests</h1>
+            <h1>Assigned Booking Requests</h1>
+            <i class="fas fa-user"></i>
+
             <!-- <button type="button" class="btn btn-primary btn-lg" onclick="openModal()">Add a flight</button> -->
         </div> 
         <div id="myModal" class="modal">
@@ -122,14 +129,6 @@ if ($roleID != 2) {
                         <input type="text" class="form-control" id="inputZip">
                     </div> -->
                     <div class="col-12">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="gridCheck">
-                            <label class="form-check-label" for="gridCheck">
-                                Check me out
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col-12">
                         <button style="background-color: #2e7d32; border-color: cornsilk" type="submit"
                             class="btn btn-primary" name="flightBtn">Add Flight</button>
                     </div>
@@ -137,7 +136,7 @@ if ($roleID != 2) {
             </div>
         </div>
         <div class="welcome-bar">
-            <h3>Join the happines train today by booking a trip!</h3>
+            <h3>View all booking requests assigned to you</h3>
         </div>
         <div class="recent-bookings">
             <table class="table table-striped table-hover">
@@ -152,7 +151,7 @@ if ($roleID != 2) {
                         <th>
                             Duration
                         </th>
-                        <th>
+                       <th>
                             Number of People
                         </th>
                         <th>
@@ -213,7 +212,7 @@ if ($roleID != 2) {
         </div>
     </div>
     <div class="sidebar-right">
-        <i class="fas fa-user"></i>
+        <!-- <i class="fas fa-user"></i> -->
         <div class="user-link">
             <div class="user-info">
                 <?php
@@ -234,6 +233,18 @@ if ($roleID != 2) {
             // Unset the session variables
             unset($_SESSION["flight_added"]);
             unset($_SESSION["flight_message"]);
+            // Output JavaScript code to show the alert
+            echo "showAlert('$message', '$type');";
+        }
+        if (isset($_SESSION["booking_processed"])) {
+            // Check if it's a success or error
+            $type = ($_SESSION["booking_processed"] === true) ? 'success' : 'error';
+
+            // Get the message from $_SESSION["booking_processed_created"]
+            $message = $_SESSION["process_message"];
+            // Unset the session variables
+            unset($_SESSION["booking_processed"]);
+            unset($_SESSION["process_message"]);
             // Output JavaScript code to show the alert
             echo "showAlert('$message', '$type');";
         }

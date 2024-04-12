@@ -1,7 +1,10 @@
-<?php 
+<?php
 include "../settings/core.php";
+include "../action/getStats.php";
+include "../action/getBookedFlightUser.php";
+$userID = userIdExist();
 $roleID = userRoleIdExist();
-if($roleID!=1){
+if ($roleID != 1) {
     header("Location: ../Login/login_view.php");
 }
 ?>
@@ -21,27 +24,16 @@ if($roleID!=1){
     <div class="sidebar">
         <a href="#" class="logo">
             <img src="../images/Bus.png" alt="">
-            <span class="nav-item">BusBoss</span>
+            <span class="nav-item">TraveX</span>
         </a>
         <ul>
             <li>
                 <i class="fas fa-home"></i>
-                <a href="../view/UserDashboard.php">
+                <a href="../view/dashboard.php">
                     <span class="nav-item">Home</span>
                 </a>
             </li>
-            <li> <i class="fas fa-user"></i>
 
-                <a href="../view/profile.php">
-                    <span class="nav-item">Profile</span>
-                </a>
-            </li>
-            <li class="active"> <i class="fas fa-history"></i>
-
-                <a href="../view/History.php">
-                    <span class="nav-item">History</span>
-                </a>
-            </li>
             <li> <i class="fas fa-book"></i>
 
                 <a href="../view/booking_view.php">
@@ -67,56 +59,93 @@ if($roleID!=1){
         <div class="top">
             <h1>Dashboard</h1>
             <i class="fas fa-user"></i>
-            <div class="sidebar-right">
-                <!-- <h2 class="user-details">User Information:</h2> -->
-                <div class="user-link">
-                    <div class="user-info">
-                        <?php
-                        include_once ("../function/displayUserDetails.php");
-                        userDetails();
-                        ?>
-                    </div>
-                </div>
-
-            </div>
         </div>
         <div class="welcome-bar">
-                <h3>Welcome Chelsea!</h3>
-            </div>
+            <h2>Welcome!</h2>
+        </div>
         <div class="main-container">
             <div class="container">
                 <div class="cards">
                     <div class="card">
-                        <div class="card-header">Bookings Made</div>
-                        <div class="card-content">100</div>
+                        <div class="card-header">Bookings Requested</div>
+                        <div class="card-content">
+                            <?php
+                            echo getRequestedBookingCount();
+                            ?>
+                        </div>
                     </div>
 
                     <div class="card">
                         <div class="card-header">Bookings Cancelled</div>
-                        <div class="card-content">20</div>
+                        <div class="card-content">
+                            <?php echo getCancelledBookingCount();
+                            ?>
+                        </div>
                     </div>
 
                     <div class="card">
-                        <div class="card-header">Bookings Confirmed</div>
-                        <div class="card-content">80</div>
+                        <div class="card-header">Bookings Processed</div>
+                        <div class="card-content">
+                            <?php echo getBookedBookingCount();
+                            ?>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <div class="recent-bookings">
-                <div class="card-header">Recent Bookings</div>
-                <div class="recent-booking">
-                    <div class="booking-item"><span>Booking 1:</span> John Doe - Room 101</div>
+                <div class="card-header">
+                    <h3>Processed Bookings</h3>
                 </div>
-                <div class="recent-booking">
-                    <div class="booking-item"><span>Booking 2:</span> Jane Smith - Room 102</div>
-                </div>
-                <div class="recent-booking">
-                    <div class="booking-item"><span>Booking 3:</span> Alice Johnson - Room 103</div>
-                </div>
-                <div class="recent-booking">
-                    <div class="booking-item"><span>Booking 4:</span> Bob Brown - Room 104</div>
-                </div>
+                <?php
+                // Get user flight details
+                $userFlightDetails = getUserFlightDetails($userID);
+
+                // Check if there are any bookings
+                if (!empty($userFlightDetails)) {
+                    // Counter variable to keep track of booking number
+                    $counter = 1;
+                    // Loop through the flight details
+                    foreach ($userFlightDetails as $flight) {
+                        ?>
+                        <div class="recent-booking">
+                            <div class="booking-item"><span>Booking
+                                    <?php echo $counter; ?>:
+                                </span>
+                                <?php
+                                echo "<div class='flight-detail'><h4>Flight ID</h4><span>" . $flight['flightID'] . "</span></div>";
+                                echo "<div class='flight-detail'><h4>Departure City</h4><span>" . $flight['departureCity'] . "</span></div>";
+                                echo "<div class='flight-detail'><h4>Arrival City</h4><span>" . $flight['arrivalCity'] . "</span></div>";
+                                echo "<div class='flight-detail'><h4>Airline</h4><span>" . $flight['name'] . "</span></div>";
+                                ?>
+                            </div>
+                        </div>
+                        <?php
+                        // Increment the counter
+                        $counter++;
+                    }
+                } else {
+                    // If no bookings found, display a message
+                    ?>
+                    <div class="recent-booking">
+                        <div class="booking-item">No recent bookings found.</div>
+                    </div>
+                    <?php
+                }
+                ?>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="sidebar-right">
+        <!-- <h2 class="user-details">User Information:</h2> -->
+        <div class="user-link">
+            <div class="user-info">
+                <?php
+                include_once ("../function/displayUserDetails.php");
+                userDetails();
+                ?>
             </div>
         </div>
 

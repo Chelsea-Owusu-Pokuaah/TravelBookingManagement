@@ -42,13 +42,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["flightBtn"])) {
     }
 
     // Check for duplicates
-    $departureCity = mysqli_real_escape_string($conn, $_POST["departureCity"]);
+    $departureCity = "Accra";
     $arrivalCity = mysqli_real_escape_string($conn, $_POST["arrivalCity"]);
     $date = mysqli_real_escape_string($conn, $_POST["date"]);
     $arrivalDate = mysqli_real_escape_string($conn, $_POST["arrivalDate"]);
 
-    $checkDuplicateQuery = "SELECT * FROM Flight WHERE departureCity = '$departureCity' 
-                            AND arrivalCity = '$arrivalCity' 
+    $checkDuplicateQuery = "SELECT * FROM Flight WHERE  
+                            arrivalCity = '$arrivalCity' 
                             AND departureDate = '$date'
                             AND arrivalDate = '$arrivalDate'";
     $checkDuplicateResult = mysqli_query($conn, $checkDuplicateQuery);

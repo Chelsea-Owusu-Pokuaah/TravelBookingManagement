@@ -73,16 +73,16 @@ if (isset($_POST["bookingBtn"])) {
 
 function handleBookingError($errorMessage)
 {
-    $_SESSION["booked"] = false;
-    $_SESSION["booking_requested"] = $errorMessage;
+    $_SESSION["update"] = false;
+    $_SESSION["booking_updated"] = $errorMessage;
     header("Location: ../view/booking_view.php");
     exit();
 }
 
 function handleBookingSuccess($successMessage)
 {
-    $_SESSION["booked"] = true;
-    $_SESSION["booking_requested"] = $successMessage;
+    $_SESSION["update"] = true;
+    $_SESSION["booking_updated"] = $successMessage;
     header("Location: ../view/booking_view.php");
     exit();
 }

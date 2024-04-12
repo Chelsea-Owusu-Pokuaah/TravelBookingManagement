@@ -28,7 +28,7 @@ echo '
     <a style="color: #e74c3c;" class = "delete_icon" href="../action/delete_request.php?requestID=' . $result['requestID'] . '">
     <i class="fa-solid fa-trash-can"></i>
 </a>
-<a style="color: #e74c3c;"class = "edit_icon" href="../admin/edit_request.php?requestID=' . $result['requestID'] . '">
+<a style="color: #e74c3c;"class = "edit_icon" href="../admin/processRequest.php?requestID=' . $result['requestID'] . '">
     <i class="fa-solid fa-pen-to-square"></i> 
 </a> 
 </td>
